@@ -1,0 +1,53 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+dist/
+build/
+eggs/
+.eggs/
+*.egg-info/
+lib/
+lib64/
+
+# PyTorch specific
+*.pt
+*.pth
+*.ckpt
+*.tfevents
+.ipynb_checkpoints/
+
+# Environment
+.env
+venv/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+
+# artifacts
+*.mp4
+
+# data
+*.ply
+data/
+tb_logs/
+
+# model weights
+ckpt/
+
+# output dir
+*.out
+output/
+# tensoboard output
+runs/

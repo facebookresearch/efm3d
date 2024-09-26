@@ -1,0 +1,30 @@
+ATEK Category Name,EFM version ASE Category Name,EFM version ASE Category Id
+table,table,0
+sofa,sofa,1
+shelves,shelf,2
+chair,chair,3
+bed,bed,4
+floor mat,floor_mat,5
+exercise_weight,exercise_weight,6
+cutlery,cutlery,7
+container,container,8
+clock,clock,9
+cart,cart,10
+vase,vase,11
+tent,tent,12
+plant,flower_pot,13
+pillow,pillow,14
+mount,mount,15
+lamp,lamp,16
+ladder,ladder,17
+fan,fan,18
+cabinet,cabinet,19
+jar,jar,20
+picture,picture_frame,21
+mirror,mirror,22
+electronic_device,electronic_device,23
+dresser,dresser,24
+clothes_rack,clothes_rack,25
+battery_charger,battery_charger,26
+air_conditioner,air_conditioner,27
+window,window,28

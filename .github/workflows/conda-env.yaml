@@ -1,0 +1,30 @@
+name: Conda Environment CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test conda env
+    runs-on: "ubuntu-latest"
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: efm3d
+          environment-file: environment.yml
+          python-version: 3.9
+          auto-activate-base: false
+      - run: |
+          conda info
+          conda list
+          conda activate efm3d
+          pip install -r requirements.txt

@@ -1,0 +1,4 @@
+projectaria-atek
+git+https://github.com/facebookresearch/pytorch3d.git@V0.7.8
+tensorboard==2.14.0
+torchmetrics==0.10.1

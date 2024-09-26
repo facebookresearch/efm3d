@@ -1,0 +1,50 @@
+atek_config_name: "efm"
+camera_temporal_subsampler:
+  main_camera_label: "camera-rgb"
+  time_domain: "DEVICE_TIME"
+  main_camera_target_freq_hz: 10.0
+  sample_length_in_num_frames: 20
+  stride_length_in_num_frames: 10
+processors:
+  rgb:
+    selected: true
+    sensor_label: "camera-rgb"
+    time_domain: "DEVICE_TIME"
+    tolerance_ns: 10_000_000
+    undistort_to_linear_cam: false  # if set, undistort to a linear camera model
+    target_camera_resolution: [240, 240] # if set, rescale to [image_width, image_height]
+    rescale_antialias: false # to be consistent with cv2
+    rotate_image_cw90deg: false # if set, rotate image by 90 degrees clockwise
+  slam_left:
+    selected: true
+    sensor_label: "camera-slam-left"
+    tolerance_ns: 10_000_000
+    time_domain: "DEVICE_TIME"
+    target_camera_resolution: [320, 240] # if set, rescale to [image_width, image_height]
+    rescale_antialias: false # to be consistent with cv2
+  slam_right:
+    selected: true
+    sensor_label: "camera-slam-right"
+    tolerance_ns: 10_000_000
+    time_domain: "DEVICE_TIME"
+    target_camera_resolution: [320, 240] # if set, rescale to [image_width, image_height]
+    rescale_antialias: false # to be consistent with cv2
+  mps_traj:
+    selected: true
+    tolerance_ns: 10_000_000
+  mps_semidense:
+    selected: true
+    tolerance_ns: 10_000_000
+  rgb_depth:
+    selected: true
+    sensor_stream_id: "345-1" # 345-1 for ADT data, 214-8 for ASE data
+    tolerance_ns: 10_000_000
+    time_domain: "DEVICE_TIME"
+    convert_zdepth_to_dist: false
+  efm_gt:
+    selected: true
+    tolerance_ns : 10_000_000
+    category_mapping_field_name: category # {prototype_name, category}
+wds_writer:
+  prefix_string: ""
+  max_samples_per_shard: 8

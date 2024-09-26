@@ -1,0 +1,32 @@
+_target_: efm3d.model.evl.EVL
+neck_hidden_dims: [128, 256, 512]
+head_hidden_dim: 256
+head_layers: 2
+taxonomy_file: efm3d/config/taxonomy/ase_sem_name_to_id.csv
+
+video_backbone:
+  _target_: efm3d.model.video_backbone.VideoBackboneDinov2
+  freeze_encoder: true
+  image_tokenizer:
+    _target_: efm3d.model.image_tokenizer.ImageToDinoV2Tokens
+    dinov2_name: vit_base_v25
+    freeze: true
+    handle_rotated_data: true
+    dim_out: 768
+    add_lin_layer: false
+    multilayer_output: true
+    ckpt_path: ckpt/dinov2_vitb14_reg4_pretrain.pth
+  video_streams: [rgb]
+  correct_vignette: false
+  optimize_vignette: false
+video_backbone3d:
+  _target_: efm3d.model.lifter.Lifter
+  in_dim: 768
+  out_dim: 64
+  patch_size: 16
+  voxel_size: [96,96,96]
+  voxel_extent: [-2.0, 2.0, 0.0, 4.0, -2.0, 2.0]
+  head_type: dpt_ori
+  streams: [rgb]
+  joint_slam_streams: false
+  joint_streams: false
