@@ -102,6 +102,8 @@ def sample_images(
     norm_samp_pts = normalize_keypoints(
         samp_pts.clone(), height=cams_resize[0].size[1], width=cams_resize[0].size[0]
     )
+    device = feat2d.device
+    padding_mode = "zeros" if "mps" in str(device) else padding_mode
     samp_feats = torch.nn.functional.grid_sample(
         feat2d,
         norm_samp_pts.unsqueeze(-2),

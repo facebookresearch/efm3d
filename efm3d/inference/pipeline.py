@@ -143,8 +143,14 @@ def run_one(
     output_dir = create_output_dir(output_dir, model_ckpt, data_path)
 
     # create model
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    checkpoint = torch.load(model_ckpt, weights_only=True)
+    if torch.cuda.is_available():
+        device = "cuda"
+    elif torch.backends.mps.is_available():
+        device = "mps"
+    else:
+        device = "cpu"
+
+    checkpoint = torch.load(model_ckpt, weights_only=True, map_location=device)
     model_config = omegaconf.OmegaConf.load(model_cfg)
     model = hydra.utils.instantiate(model_config)
     model.load_state_dict(checkpoint["state_dict"], strict=True)
@@ -162,7 +168,9 @@ def run_one(
     efm_inf.run()
     del efm_inf
     del model
-    torch.cuda.empty_cache()
+
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
     # track obbs
     try:
@@ -188,7 +196,7 @@ def run_one(
             )
 
     # fuse mesh
-    vol_fusion = VolumetricFusion(output_dir, voxel_res=voxel_res)
+    vol_fusion = VolumetricFusion(output_dir, voxel_res=voxel_res, device=device)
     vol_fusion.run()
     fused_mesh = vol_fusion.get_trimesh()
     pred_mesh_ply = os.path.join(output_dir, "fused_mesh.ply")

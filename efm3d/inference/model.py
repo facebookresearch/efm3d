@@ -161,7 +161,6 @@ class EfmInference:
                 gt_sem_id.update(batch[ARIA_OBB_SEM_ID_TO_NAME][0])
             idx += 1
 
-        torch.cuda.synchronize()
         print(f"\ninference speed {idx / (time.time() - start) :.02f} sample/s")
 
         # save all T_wv as one tensor to avoid writing small files

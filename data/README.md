@@ -26,7 +26,8 @@ paths to the ASE sequences. Put it under `<EFM3D_DIR>/data`.
 
 <img src="../assets/download_ase.png" alt="download_ase" style="width: 800px; border: 2px solid grey;">
 
-Run the command to download the all 100 eval sequences to `ase_eval`,
+Run the command under `{EFM3D_DIR}/data` to download all 100 eval sequences to
+`ase_eval`,
 
 ```
 python dataverse_url_parser.py --config-name efm_eval --input-json ./AriaSyntheticEnvironment_ATEK_download_urls.json --output-folder-path ./ase_eval --download-wds-to-local
@@ -143,3 +144,18 @@ Download the whole dataset
 ```
 aria_dataset_downloader -c AEO_download_urls.json -o ./aeo -d 0 1 2 3 6 7
 ```
+
+# FAQs
+
+1. I hit errors running the downloading commands
+
+Make sure you 1) have installed
+[projectaria_tools](https://facebookresearch.github.io/projectaria_tools/docs/data_utilities/getting_started)
+by pip or in conda, 2) are under the `<EFM3D_DIR>/data` folder when running the
+command.
+
+2. Command not found: `aria_dataset_downloader`
+
+`aria_dataset_downloader` is provided in `projectaria_tools`
+(`pip install projectaria_tools`). It requires Python 3.10
+[if you are on Apple Silicon](https://facebookresearch.github.io/projectaria_tools/docs/data_utilities/getting_started#step-1--installupdate-python-3).

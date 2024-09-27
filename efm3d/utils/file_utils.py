@@ -846,7 +846,6 @@ def sample_from_range(
         return []
 
     # if sample rate is an integer, we just return the sampling by using sample_rate as the step size.
-    # this is backward compatible with the behavior of AriaStreamer previously.
     if type(sample_rate) is int or sample_rate.is_integer():
         return list(range(start, end, int(sample_rate)))
 

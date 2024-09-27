@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import platform
 from typing import Optional, Tuple, Union
 
 import moderngl
@@ -891,7 +892,7 @@ def draw_snippet_scene_3d(
     Draw a 3D scene of obbs and camera trajectory.
 
     Args:
-      snippet: a AriaStreamer snippet dict containing all relevant information for drawing
+      snippet: a snippet dict containing all relevant information for drawing
       sem_ids_to_names: a dict mapping sem ids to names
       width: width of figure (only needed if scene is not provided)
       height: height of figure (only needed if scene is not provided)
@@ -1150,7 +1151,10 @@ def projection_matrix_rdf_top_left(w, h, fu, fv, u0, v0, zNear, zFar):
 
 def init_egl_context():
     try:
-        ctx = moderngl.create_context(standalone=True, backend="egl")
+        if platform.system() == "Darwin":
+            ctx = moderngl.create_context(standalone=True)
+        else:
+            ctx = moderngl.create_context(standalone=True, backend="egl")
     except Exception as e:
         print(f"{e}")
         return None

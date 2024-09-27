@@ -233,7 +233,7 @@ def generate_video(
     stride_s: float = 0.1,
 ):
     """
-    streamer: AriaStreamer object, assuming input snippets are 1s at 10 FPS.
+    streamer: the data iterator, assuming input snippets are 1s at 10 FPS.
     output_dir: the output folder for the video, will also load obbs and per_snip artifacts from the same folder
     fps: the output video fps
     vol_fusion: A volumetric fusion class instance. If not None, will use it to show the incremental mesh, updated as 1s frame rate.

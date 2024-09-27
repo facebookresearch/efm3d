@@ -152,6 +152,8 @@ def eval_mesh_to_mesh(
 
     if torch.cuda.is_available():
         dev = "cuda:0"
+    elif torch.backends.mps.is_available():
+        dev = "mps"
     else:
         dev = "cpu"
     print(f"==> [eval_mesh_to_mesh] use device {dev}")

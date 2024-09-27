@@ -35,15 +35,16 @@ code.
 ## Installation
 
 **Option 1**: First navigate to the root folder. The core library is written in
-PyTorch, with additional dependencies listed in `requirements.txt`.
-This needs Python>=3.9
+PyTorch, with additional dependencies listed in `requirements.txt`. This needs
+Python>=3.9
 
 ```
 pip install -r requirements.txt
 ```
 
-**Option 2 (Slow)**: You can choose to use [conda](https://anaconda.org/anaconda/conda)
-to manage the dependencies. The runtime dependencies can be installed by running
+**Option 2 (Slow)**: You can choose to use
+[conda](https://anaconda.org/anaconda/conda) to manage the dependencies. The
+runtime dependencies can be installed by running
 
 ```
 conda env create --file=environment.yml
@@ -51,28 +52,33 @@ conda activate efm3d
 ```
 
 This should be sufficient to initiate the use of the EVL model inference with
-the pretrained model weights. please refer to [INSTALL.md](INSTALL.md) for a full installation, which is required for training and eval,
+the pretrained model weights. please refer to [INSTALL.md](INSTALL.md) for a
+full installation, which is required for training and eval.
 
 ## Inference
 
 ### Pretrained models
 
-Download the pretrained model weights and a sample data on the [EFM3D](https://www.projectaria.com/research/efm3D/#download-dataset) page (email required).
-We provide two model checkpoints, one for server-side GPU (>20GB GPU memory) and one for desktop GPU. There is a sample sequence attached
-to the model weights to facilitate using the model.
-Check out the [README.md](ckpt/README.md) for detailed instructions on how to download the model weights.
-
+Download the pretrained model weights and a sample data on the
+[EFM3D](https://www.projectaria.com/research/efm3D/#download-dataset) page
+(email required). We provide two model checkpoints, one for server-side GPU
+(>20GB GPU memory) and one for desktop GPU. There is a sample sequence attached
+to the model weights to facilitate using the model. Check out the
+[README.md](ckpt/README.md) for detailed instructions on how to download the
+model weights.
 
 ### Run on the sample data
-After downloading the model weights `evl_model_ckpt.zip`, put it under `${EFM3D_DIR}/ckpt/`,
-then run the command under `${EFM3D_DIR}`
+
+After downloading the model weights `evl_model_ckpt.zip`, put it under
+`${EFM3D_DIR}/ckpt/`, then run the command under `${EFM3D_DIR}`
 
 ```
 sh prepare_inference.sh
 ```
 
-This will unzip the file, make sure the model weights and sample data are put under the right paths.
-To run inference on the sample sequence
+This will unzip the file, make sure the model weights and sample data are put
+under the right paths. To run inference on the sample sequence
+
 ```
 python infer.py --input ./data/seq136_sample/video.vrs
 ```
@@ -85,14 +91,25 @@ RTX-3080). The performance is downgraded a bit.
 python infer.py --input ./data/seq136_sample/video.vrs --model_ckpt ./ckpt/model_lite.pth --model_cfg ./efm3d/config/evl_inf_desktop.yaml --voxel_res 0.08
 ```
 
+### Run on macOS
+
+The inference demo works on macOS too. Use the following command (tested on
+Apple M1 MAX 64GB memory)
+
+```
+PYTORCH_ENABLE_MPS_FALLBACK=1 python infer.py --input ./data/seq136_sample/video.vrs --model_ckpt ./ckpt/model_lite.pth --model_cfg ./efm3d/config/evl_inf_desktop.yaml --voxel_res 0.08
+```
+
 This wraps up the basic usage of EVL model. To train the model from scratch and
 use the EFM3D benchmark, have a full installation following
 [INSTALL.md](INSTALL.md) then read below
 
 ### Inference with ATEK
 
-The inference also supports taking [ATEK-format](https://github.com/facebookresearch/atek) WDS sequences. First download a
-test ASE sequence following the `ASE eval data` section in [README.md](data/README.md), then run
+The inference also supports taking
+[ATEK-format](https://github.com/facebookresearch/atek) WDS sequences. First
+download a test ASE sequence following the `ASE eval data` section in
+[README.md](data/README.md), then run
 
 ```
 python infer.py --input ./data/ase_eval/81022
@@ -100,12 +117,15 @@ python infer.py --input ./data/ase_eval/81022
 
 ## Datasets
 
-See [README.md](data/README.md) for instructions to work with all datasets included in the EFM3D benchmark.
-There are three datasets in the EFM3D benchmark
+See [README.md](data/README.md) for instructions to work with all datasets
+included in the EFM3D benchmark. There are three datasets in the EFM3D benchmark
 
-- [Aria Synthetic Environments (ASE)](https://www.projectaria.com/datasets/ase/): for training and eval on 3D object detection and surface reconstruction
-- [Aria Digital Twin (ADT)](https://www.projectaria.com/datasets/adt/): for eval on surface reconstruction
-- [Aria Everyday Objects (AEO)](https://www.projectaria.com/datasets/aeo/): for eval on 3D object detection.
+- [Aria Synthetic Environments (ASE)](https://www.projectaria.com/datasets/ase/):
+  for training and eval on 3D object detection and surface reconstruction
+- [Aria Digital Twin (ADT)](https://www.projectaria.com/datasets/adt/): for eval
+  on surface reconstruction
+- [Aria Everyday Objects (AEO)](https://www.projectaria.com/datasets/aeo/): for
+  eval on 3D object detection.
 
 ## Train EVL
 
@@ -138,13 +158,15 @@ trained on 2 nodes with 8xH100.
 sbatch sbatch_run.sh
 ```
 
-By default the tensorboard log is saved to ${EFM3D_DIR}/tb_logs
+By default the tensorboard log is saved to `${EFM3D_DIR}/tb_logs`.
 
 ## EFM3D benchmark
 
 Please see [benchmark.md](benchmark.md) for details.
 
 ## Citing EFM3D
+
+If you find EFM3D useful, please consider citing
 
 ```
 @article{straub2024efm3d,
@@ -153,7 +175,12 @@ Please see [benchmark.md](benchmark.md) for details.
   journal={arXiv preprint arXiv:2406.10224},
   year={2024}
 }
+```
 
+If you use Aria Digital Twin (ADT) dataset in the EFM3D benchmark, please
+consider citing
+
+```
 @inproceedings{pan2023aria,
   title={Aria digital twin: A new benchmark dataset for egocentric 3d machine perception},
   author={Pan, Xiaqing and Charron, Nicholas and Yang, Yongqian and Peters, Scott and Whelan, Thomas and Kong, Chen and Parkhi, Omkar and Newcombe, Richard and Ren, Yuheng Carl},
@@ -161,7 +188,12 @@ Please see [benchmark.md](benchmark.md) for details.
   pages={20133--20143},
   year={2023}
 }
+```
 
+If you use the Aria Synthetic Environments (ASE) dataset in the EFM3D benchmark,
+please consider citing
+
+```
 @article{avetisyan2024scenescript,
   title={SceneScript: Reconstructing Scenes With An Autoregressive Structured Language Model},
   author={Avetisyan, Armen and Xie, Christopher and Howard-Jenkins, Henry and Yang, Tsun-Yi and Aroudj, Samir and Patra, Suvam and Zhang, Fuyang and Frost, Duncan and Holland, Luke and Orme, Campbell and others},

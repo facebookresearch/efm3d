@@ -157,7 +157,6 @@ class EVL(torch.nn.Module):
             out["obbs_pr_nms"] = obbs_pr_nms
             out["cent_pr_nms"] = cent_pr_nms
 
-        # Fill these fields for efm_streamer
         # obb tracker expects ARIA_OBB_PRED and ARIA_OBB_PRED_VIZ to be in snippet coord system
         obbs_pr_nms_s = obbs_pr_nms.clone()
         T_ws = batch[ARIA_SNIPPET_T_WORLD_SNIPPET]  # B x 1 x 12
