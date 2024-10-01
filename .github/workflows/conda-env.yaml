@@ -20,7 +20,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: efm3d
-          environment-file: environment.yml
+          environment-file: environment-mac.yml
           python-version: 3.9
           auto-activate-base: false
       - run: |
