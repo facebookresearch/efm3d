@@ -42,9 +42,9 @@ Python>=3.9
 pip install -r requirements.txt
 ```
 
-**Option 2 (Slow)**: You can choose to use
-[conda](https://anaconda.org/anaconda/conda) to manage the dependencies. The
-runtime dependencies can be installed by running
+**Option 2**: You can choose to use conda to manage the dependencies.
+We recommend using [miniconda](https://docs.anaconda.com/miniconda/#quick-command-line-install) for its fast dependency solver.
+The runtime dependencies can be installed by running (replace `environment.yaml` with `environment-mac.yml` if run on macOS)
 
 ```
 conda env create --file=environment.yml
