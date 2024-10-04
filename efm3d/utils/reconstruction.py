@@ -99,9 +99,9 @@ def get_fused_gt_feat(
             gt_feat_volume_counts[b][
                 pc_ids_t[:, 0], pc_ids_t[:, 1], pc_ids_t[:, 2]
             ] += 1.0
-            gt_feat_volume[b][
-                pc_ids_t[:, 0], pc_ids_t[:, 1], pc_ids_t[:, 2]
-            ] += feat_gt_t
+            gt_feat_volume[b][pc_ids_t[:, 0], pc_ids_t[:, 1], pc_ids_t[:, 2]] += (
+                feat_gt_t
+            )
         gt_feat_volume[b][gt_feat_volume_counts[b] > 1e-4] /= gt_feat_volume_counts[b][
             gt_feat_volume_counts[b] > 1e-4
         ].unsqueeze(-1)
@@ -214,8 +214,9 @@ def compute_occupancy_loss_subvoxel(
     free_samples, valid_samples = sample_voxels(
         occ.unsqueeze(1), p3s_free_vox.view(B, -1, 3)
     )
-    free_samples, valid_samples = free_samples.view(B, T, -1), valid_samples.view(
-        B, T, -1
+    free_samples, valid_samples = (
+        free_samples.view(B, T, -1),
+        valid_samples.view(B, T, -1),
     )
     valid_free = torch.logical_and(valid_samples, valid_free)
     free_samples = free_samples[valid_free].clamp(0.0, 1.0)
@@ -227,8 +228,9 @@ def compute_occupancy_loss_subvoxel(
     surf_samples, valid_samples = sample_voxels(
         occ.unsqueeze(1), p3s_surf_vox.view(B, -1, 3)
     )
-    surf_samples, valid_samples = surf_samples.view(B, T, -1), valid_samples.view(
-        B, T, -1
+    surf_samples, valid_samples = (
+        surf_samples.view(B, T, -1),
+        valid_samples.view(B, T, -1),
     )
     valid_surf = torch.logical_and(valid_samples, valid_surf)
     surf_samples = surf_samples[valid_surf].clamp(0.0, 1.0)
@@ -240,8 +242,9 @@ def compute_occupancy_loss_subvoxel(
     occ_samples, valid_samples = sample_voxels(
         occ.unsqueeze(1), p3s_occ_vox.view(B, -1, 3)
     )
-    occ_samples, valid_samples = occ_samples.view(B, T, -1), valid_samples.view(
-        B, T, -1
+    occ_samples, valid_samples = (
+        occ_samples.view(B, T, -1),
+        valid_samples.view(B, T, -1),
     )
     valid_occ = torch.logical_and(valid_samples, valid_occ)
     occ_samples = occ_samples[valid_occ].clamp(0.0, 1.0)

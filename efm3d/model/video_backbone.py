@@ -66,7 +66,9 @@ class VideoBackbone(torch.nn.Module, ABC):
             self.video_streams = ["rgb"]
         self.pass_batch = pass_batch
         self.stream_to_id = {"rgb": 0, "slaml": 1, "slamr": 2}
-        assert set(self.video_streams).issubset(
+        assert set(
+            self.video_streams
+        ).issubset(
             set(self.stream_to_id.keys())
         ), f"{self.video_streams} are not all valid (need to be a subset of {self.stream_to_id.keys()})"
 

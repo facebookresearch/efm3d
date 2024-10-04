@@ -120,7 +120,6 @@ def run_local_cosy(
         and ARIA_SNIPPET_TIME_NS in batch
         and ARIA_SNIPPET_T_WORLD_SNIPPET in batch
     ):
-
         T_world_snippet = get_local_pose_helper(
             snippet_origin_time_s,
             batch,
@@ -742,7 +741,6 @@ def load_atek_wds_dataset_as_efm_train(
     batch_size: Optional[int] = None,
     collation_fn: Optional[Callable] = None,
 ):
-
     efm_model_adaptor = EfmModelAdaptor(
         freq=freq,
         snippet_length_s=snippet_length_s,

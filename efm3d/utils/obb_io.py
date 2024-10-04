@@ -88,7 +88,6 @@ def get_all_Ts_world_object_for_time(
     static_Ts_world_object = obs["static_Ts_world_object"]
     have_dynamic_objects = len(obs["timedTs_world_object"]) > 1
     if load_dynamic_objects and have_dynamic_objects:
-
         if time in obs["timedTs_world_object"].keys():
             dynamic_Ts_world_object = obs["timedTs_world_object"][time]
         else:

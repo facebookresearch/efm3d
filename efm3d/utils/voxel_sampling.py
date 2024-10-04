@@ -125,7 +125,9 @@ def sample_voxels(feat3d, pts_v, differentiable=False, interp_mode="bilinear"):
     if differentiable:
         # use differentiable implementation of 3d trilinear interpolation.
         samp_feats = diff_grid_sample(
-            feat3d, norm_samp_pts.view(B, 1, 1, -1, 3), align_corners=False  # B 1 1 N 3
+            feat3d,
+            norm_samp_pts.view(B, 1, 1, -1, 3),
+            align_corners=False,  # B 1 1 N 3
         )
     else:
         # if we dont need differentiability wrt to sample points then we can use

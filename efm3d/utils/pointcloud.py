@@ -357,7 +357,6 @@ def pointcloud_occupancy_samples(
 def pointcloud_to_occupancy(
     pc_w, T_wc, cam, T_wv, vW, vH, vD, voxel_extent, S=1, occ=None, mask=None
 ):
-
     device = pc_w.device
     if occ is None:
         occ = torch.zeros((vD, vH, vW), device=device)

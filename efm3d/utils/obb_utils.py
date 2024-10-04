@@ -157,7 +157,6 @@ class MeanAveragePrecision3D(MeanAveragePrecision):
         dist_sync_fn: Callable = None,
         ret_all_prec_rec: bool = False,
     ) -> None:  # type: ignore
-
         # Use Omni3D iOU thresholds by default
         iou_thresholds = (
             iou_thresholds
@@ -206,7 +205,9 @@ class MeanAveragePrecision3D(MeanAveragePrecision):
         self.ret_all_prec_rec = ret_all_prec_rec
         self.eval_imgs = [] if self.ret_all_prec_rec else None
 
-    def update(self, preds: List[Dict[str, Tensor]], target: List[Dict[str, Tensor]]) -> None:  # type: ignore
+    def update(
+        self, preds: List[Dict[str, Tensor]], target: List[Dict[str, Tensor]]
+    ) -> None:  # type: ignore
         """Add detections and ground truth to the metric.
 
         Args:

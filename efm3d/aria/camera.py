@@ -231,7 +231,6 @@ class CameraTW(TensorWrapper):
         valid_radius: torch.Tensor = 99999.0 * torch.ones(1),
         T_camera_rig: Union[torch.Tensor, PoseTW] = IdentityPose,  # 1x12.
     ):
-
         # Try to auto-determine the camera model.
         if (
             is_fisheye624(type_str) and params.shape[-1] == 16

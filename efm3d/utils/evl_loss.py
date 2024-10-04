@@ -106,7 +106,6 @@ def compute_obb_losses(
     bbox_weight,
     cham_weight,
 ):
-
     B, _, vD, vH, vW = outputs["cent_pr"].shape
     ve = voxel_extent
     N = vD * vH * vW

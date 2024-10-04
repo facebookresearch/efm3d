@@ -376,7 +376,6 @@ def load_3d_bounding_box_transforms(scene_path, time_in_secs=False, load_torch=F
 
 
 def load_3d_bounding_box_local_extents(bb3d_path, load_torch=False):
-
     bb3ds_local = {}
     with fsspec.open(bb3d_path).open() as f:
         # Object UID, Timestamp ( ns ), p_local_obj.xmin, p_local_obj.xmax, p_local_obj.ymin, p_local_obj.ymax, p_local_obj.zmin, p_local_obj.zmax
@@ -414,7 +413,6 @@ def load_obbs_gt(
     rgb_only=False,
     filter_bb2_area=-1,
 ):
-
     obs = {}
     if load_2d_bbs:
         # Load 2d bbs from CSV.

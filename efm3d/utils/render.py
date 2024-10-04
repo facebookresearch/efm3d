@@ -227,11 +227,13 @@ def draw_bb3_lines(
                 # check if we should color this line in a special way
                 if draw_cosy and line_id in AXIS_COLORS_RGB:
                     color = AXIS_COLORS_RGB[line_id]
-                pt1 = int(round(float(pt2s[line, i, 0]))), int(
-                    round(float(pt2s[line, i, 1]))
+                pt1 = (
+                    int(round(float(pt2s[line, i, 0]))),
+                    int(round(float(pt2s[line, i, 1]))),
                 )
-                pt2 = int(round(float(pt2s[line, j, 0]))), int(
-                    round(float(pt2s[line, j, 1]))
+                pt2 = (
+                    int(round(float(pt2s[line, j, 0]))),
+                    int(round(float(pt2s[line, j, 1]))),
                 )
                 cv2.line(
                     viz,

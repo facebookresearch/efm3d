@@ -65,7 +65,6 @@ class VolumeFusion:
         surface_thres: float = 0.99,
         boundary_thres: int = 1,
     ):
-
         self.voxel_size = voxel_size  # D x H x W
         self.voxel_extent = voxel_extent  # W x H x D
         self.vD, self.vH, self.vW = self.voxel_size
@@ -84,9 +83,7 @@ class VolumeFusion:
         self.global_volume_weights = torch.zeros_like(self.global_volume)  # D H W
         self.global_volume_points = create_voxel_grid(
             self.vW, self.vH, self.vD, self.voxel_extent, device
-        ).to(
-            dtype=dtype
-        )  # W, H, D, 3
+        ).to(dtype=dtype)  # W, H, D, 3
         # reshaping
         self.global_volume_points = self.global_volume_points.permute(
             2, 1, 0, 3

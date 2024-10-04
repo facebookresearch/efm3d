@@ -111,7 +111,6 @@ def autoinit(func):
 
     @functools.wraps(func)
     def wrap(self, *args, **kwargs):
-
         # Combine args and kwargs.
         arg_names = get_nonempty_arg_names(func)
         all_args = {}
