@@ -32,8 +32,8 @@ dependencies:
     - moderngl==5.8.2
     - trimesh==4.4.9
     - scikit-image==0.24.0
-    - projectaria_tools
+    - projectaria_tools==1.5.5
+    - projectaria-atek==1.0.0
     - tensorboard==2.14.0
-    - git+https://github.com/facebookresearch/pytorch3d.git
-    - git+https://github.com/facebookresearch/atek.git
-
+    - torchmetrics==0.10.1
+    - git+https://github.com/facebookresearch/pytorch3d.git@V0.7.8
