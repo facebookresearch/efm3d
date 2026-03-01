@@ -147,6 +147,9 @@ torch.manual_seed(42)
 if torch.cuda.is_available():
     torch.cuda.manual_seed(42)
 
+# NOTE: This assignment overrides the DDP branch's `device = f"cuda:{DDP_LOCAL_RANK}"` above.
+# In multi-GPU runs, using the generic "cuda" device string may lead to inconsistent device placement
+# (e.g., defaulting to cuda:0) depending on how tensors/models are moved.
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 model_config = omegaconf.OmegaConf.load("efm3d/config/evl_train.yaml")

@@ -200,6 +200,9 @@ def compute_occ_losses(
     tv_weight,
 ):
     B, T, vD, vH, vW = outputs["occ_pr"].shape
+    # NOTE: `T_ws` is assigned twice below (squeezed vs unsqueezed). The later assignment is the one
+    # used for pose composition with `Ts_sr` (which may expect a Bx1x... pose shape).
+    # Keep this as-is for backward compatibility, but be mindful when refactoring shapes.
     T_ws = batch[ARIA_SNIPPET_T_WORLD_SNIPPET].squeeze(1)
     T_wv = outputs["voxel/T_world_voxel"]
 

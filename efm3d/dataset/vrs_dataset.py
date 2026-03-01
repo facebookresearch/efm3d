@@ -327,6 +327,8 @@ class VrsSequenceDataset(Dataset):
         # Add obbs GT if available
         self.obs = None
         if not self.is_adt:
+            # NOTE: ADT is handled as "no OBB GT" in this dataset implementation (by design/assumption).
+            # If ADT ever provides GT objects, this gate would need to be revisited.
             self.obs = self.load_objects()
         if self.obs is not None:
             obb_freq = int(1.0 / (1e-9 * (self.obb_times[1] - self.obb_times[0])))
@@ -339,6 +341,9 @@ class VrsSequenceDataset(Dataset):
         # intersect all data modalities
         min_time, max_time = compute_time_intersection(ts_lists)
 
+        # NOTE: `idx` here is the loop variable from the image timestamp loop above.
+        # After the loop, `idx` is the last camera index (typically 2 => "slamr"), so snippet timing is
+        # effectively anchored to that stream's timestamps.
         play_times_ns = get_timestamp_list_ns(self.reader, ARIA_CAM_INFO["id"][idx])
         play_times_ns = [
             ts for ts in play_times_ns if (ts > min_time and ts < max_time)
@@ -418,6 +423,9 @@ class VrsSequenceDataset(Dataset):
         self.obb_times = sorted(set(self.obs[ARIA_OBB_BB2[0]].keys()))
 
         if self.is_adt:
+            # NOTE: Under the current call path, ADT typically does not reach `load_objects()` because
+            # `__init__` guards it with `if not self.is_adt`. Keep this block for compatibility in case
+            # future datasets/loaders enable ADT OBB GT.
             T_vio_gravity = get_transform_to_vio_gravity_convention(
                 GRAVITY_DIRECTION_ADT
             )
