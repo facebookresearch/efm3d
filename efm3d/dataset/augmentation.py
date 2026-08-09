@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import logging
-from functools import partial
 from typing import Dict, List, Optional, Tuple, Union
 
 import torch
@@ -25,7 +24,6 @@ from efm3d.aria.aria_constants import (
     ARIA_POINTS_WORLD,
 )
 from torchvision.transforms.v2._color import RandomAdjustSharpness
-from webdataset import WebDataset
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
