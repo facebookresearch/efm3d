@@ -189,7 +189,7 @@ def run_one(
         from efm3d.inference.track import track_obbs
 
         track_obbs(output_dir)
-    except:
+    except Exception:
         print(f"Skip tracking obb due to missing dependency, please see INSTALL.md")
 
     # eval obb
@@ -202,7 +202,7 @@ def run_one(
 
             obb_metrics = evaluate_obb_csv(pred_csv=pred_csv, gt_csv=gt_csv, iou=0.2)
             metrics.update(obb_metrics)
-        except:
+        except Exception:
             print(
                 f"Skip obb evaluation due to missing dependency, please see INSTALL.md"
             )
